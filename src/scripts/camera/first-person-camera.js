@@ -92,8 +92,9 @@ FirstPersonCamera.prototype.initializeVars = function () {
     this._targetPitch = 0;
     this._yaw = 0;
     this._targetYaw = 0;
-    this._position = new pc.Vec3();
-    this._targetPosition = new pc.Vec3();
+
+    this._targetPosition = this.entity.getPosition();
+    this._position = this._targetPosition;
 };
 
 FirstPersonCamera.prototype.subscribeToEvents = function () {

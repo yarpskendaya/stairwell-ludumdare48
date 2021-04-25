@@ -13,13 +13,13 @@ FadeScreen.prototype.initialize = function () {
     this.timedFader = this.entity.script.timedFader;
 };
 
-FadeScreen.prototype.postInitialize = function () {
-    this.app.fire('fade', false);
-};
-
 FadeScreen.prototype.onFade = function(fade) {
-    if (fade)
+    if (fade) {
+        console.debug('Fading in');
         this.timedFader.fadeIn(this.duration);
-    else
+    }
+    else {
+        console.debug('Fading out');
         this.timedFader.fadeOut(this.duration);
+    }
 };

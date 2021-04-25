@@ -2,6 +2,7 @@ var TimedFader = pc.createScript('timedFader');
 
 TimedFader.prototype.fadeIn = function (fadeDuration) {
     this.entity.element.enabled = true;
+    this.entity.element.opacity = 0;
     var data = { opacity: 0 };
     this.entity
         .tween(data)
@@ -9,8 +10,8 @@ TimedFader.prototype.fadeIn = function (fadeDuration) {
         .on('update', function() {
             this.entity.element.opacity = data.opacity;
         }, this)
-        .yoyo(true)
-        .repeat(2)
+        .yoyo(false)
+        //.repeat(1)
         .start();
 };
 

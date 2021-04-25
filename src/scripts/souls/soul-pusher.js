@@ -6,9 +6,7 @@ SoulPusher.prototype.affectedTile = new pc.Vec2();
 SoulPusher.prototype.initialize = function () {
     this.entity.on('click', this.onClick, this);
     this.direction = this.getDirection();
-    console.debug('Direction is ' + this.direction);
     this.affectedTile = this.getAffectedTile();
-    console.debug('Affected tile is' + this.affectedTile);
 };
 
 SoulPusher.prototype.getDirection = function () {
@@ -53,7 +51,6 @@ SoulPusher.prototype.getAffectedTileY = function (x) {
 
 SoulPusher.prototype.onClick = function () {
     var y = this.entity.getPosition().y;
-    console.debug('Pushing at height ' + y);
     this.app.fire('push-souls', this.affectedTile, y, this.direction);
 };
 
