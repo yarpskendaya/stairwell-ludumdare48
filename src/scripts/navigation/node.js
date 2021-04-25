@@ -1,6 +1,6 @@
 var Node = pc.createScript('node');
 
-Node.prototype.minVertDistance = 6;
+Node.prototype.minVertDistance = 5;
 
 Node.prototype.initialize = function () {
     this.entity.on('click', this.onClick, this);
