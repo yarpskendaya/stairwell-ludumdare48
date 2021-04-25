@@ -19,8 +19,11 @@ Soul.attributes.add('weights', {
 });
 
 Soul.prototype.currentSpeed = 0;
+Soul.prototype.inertia = 0.01;
+Soul.prototype.targetPosition = new pc.Vec3();
 
 Soul.prototype.initialize = function () {
+    this.targetPosition = this.entity.getPosition();
     this.updateCurrentSpeed();
 };
 
@@ -28,11 +31,18 @@ Soul.prototype.update = function (dt) {
     this.updatePosition(dt);
 };
 
+Soul.prototype.setTargetPosition = function (targetPosition) {
+    this.targetPosition = targetPosition;
+};
+
 Soul.prototype.updatePosition = function (dt) {
     var pos = this.entity.getPosition();
-    var y = pos.y + this.currentSpeed * dt;
-    var newPos = new pc.Vec3(pos.x, y, pos.z);
     
+    var x = pc.math.lerp(pos.x, this.targetPosition.x, this.inertia);
+    var y = pos.y + this.currentSpeed * dt;
+    var z = pc.math.lerp(pos.z, this.targetPosition.z, this.inertia);
+    var newPos = new pc.Vec3(x, y, z);
+
     this.entity.setPosition(newPos);
 };
 
