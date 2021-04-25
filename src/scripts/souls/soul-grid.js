@@ -43,15 +43,14 @@ SoulGrid.prototype.onSoulPush = function (tile, height, direction) {
     if (!this.tileIsWithinBounds(tile))
         console.error('Tile was not within bounds ' + tile);
         
-    console.debug('Pushing souls!');
     var soul = this.getSoulOnTile(tile, height);
     if (!soul) return;
 
-    this.pushSoul(soul, tile, direction);
+    this.pushSoul(soul, tile, height, direction);
 };
 
-SoulGrid.prototype.pushSoul = function (soul, tile, direction) {
-    var newTile = this.getPushedToTile(tile, direction);
+SoulGrid.prototype.pushSoul = function (soul, tile, height, direction) {
+    var newTile = this.getPushedToTile(tile, height, direction);
     if (!newTile) {
         console.debug('Did not find a tile to move to');
         return;
@@ -63,18 +62,17 @@ SoulGrid.prototype.pushSoul = function (soul, tile, direction) {
     this.setSoulPosition(soul, newPos);
 };
 
-SoulGrid.prototype.getPushedToTile = function (tile, direction) {
+SoulGrid.prototype.getPushedToTile = function (tile, height, direction) {
     var eligibleTile;
     for (var i = 1; i <= 3; i++) {
         var newX = tile.x + direction.x * i;
         var newY = tile.y + direction.y * i;
         var candidateTile = new pc.Vec2(newX, newY);
-        console.debug('Checking candidate tile ' + candidateTile);
 
         if (!this.tileIsWithinBounds(candidateTile))
             return eligibleTile;
 
-        if (this.getSoulOnTile(candidateTile, 14.5)) {
+        if (this.getSoulOnTile(candidateTile, height)) {
             return eligibleTile;
         }
         
