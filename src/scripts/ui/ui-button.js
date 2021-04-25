@@ -13,7 +13,6 @@ UiButton.prototype.initialize = function () {
 
 UiButton.prototype.onClick = function (event) {
     if (this.buttonProxy) {
-        console.log('Firing!');
         this.buttonProxy.fire('click', event);
         return;
     }
